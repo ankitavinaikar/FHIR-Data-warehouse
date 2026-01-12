@@ -1,0 +1,46 @@
+import csv
+import psycopg2
+
+CSV_FILE = "input.csv"
+
+conn = psycopg2.connect(
+    dbname="mydb",
+    user="postgres",
+    password="password",
+    host="localhost",
+    port="5432"
+)
+
+cur = conn.cursor()
+
+# create table (id, name, age as example)
+cur.execute("""
+CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY,
+    name VARCHAR(100),
+    age INTEGER
+);
+""")
+
+with open(CSV_FILE, newline='', encoding="utf-8") as f:
+    reader = csv.DictReader(f)
+
+    for row in reader:
+        # basic cleaning
+        if not row["id"] or not row["name"]:
+            continue
+
+        cur.execute("""
+            INSERT INTO users (id, name, age)
+            VALUES (%s, %s, %s)
+            ON CONFLICT (id) DO NOTHING;
+        """, (
+            int(row["id"]),
+            row["name"].strip(),
+            int(row["age"]) if row["age"] else None
+        ))
+
+conn.commit()
+cur.close()
+conn.close()
+print("CSV migration completed.")
