@@ -1,0 +1,50 @@
+{
+  "resourceType": "Observation",
+  "id": "example-observation-1",
+  "status": "final",
+  "code": {
+    "coding": [
+      {
+        "code": "85354-9",
+        "system": "http://loinc.org",
+        "display": "Blood pressure panel with all children optional"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "ExamplePatient"
+  },
+  "effectiveDateTime": "2026-01-12T10:30:00+05:30",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "code": "8480-6",
+            "system": "http://loinc.org",
+            "display": "Systolic blood pressure"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 120,
+        "unit": "mmHg"
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "code": "8462-4",
+            "system": "http://loinc.org",
+            "display": "Diastolic blood pressure"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 80,
+        "unit": "mmHg"
+      }
+    }
+  ]
+}
