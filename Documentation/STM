@@ -1,0 +1,39 @@
+| Source Element          | FHIR Resource | FHIR Element Path                    | Cardinality | Mapping Rule (FHIR-compliant)                |
+| ----------------------- | ------------- | ------------------------------------ | ----------- | -------------------------------------------- |
+| policy_id               | Patient       | Patient.identifier.system            | 1..1        | Fixed value = `http://rmhc.org/policy-id`    |
+| policy_id               | Patient       | Patient.identifier.value             | 1..1        | Direct mapping, mandatory                    |
+| Name                    | Patient       | Patient.name.text                    | 1..1        | Direct mapping                               |
+| Sex                     | Patient       | Patient.gender                       | 1..1        | ConceptMap translation: F → female, M → male |
+| Age                     | Patient       | Patient.extension(age)               | 0..1        | Stored as extension when DOB unavailable     |
+| Contact No.             | Patient       | Patient.telecom.system               | 0..*        | Fixed = `phone`                              |
+| Contact No.             | Patient       | Patient.telecom.value                | 0..*        | Direct mapping                               |
+| Address                 | Patient       | Patient.address.text                 | 0..1        | Direct mapping                               |
+| Village                 | Patient       | Patient.address.city                 | 0..1        | Direct mapping                               |
+| latitude                | Patient       | Patient.address.extension(latitude)  | 0..1        | Geo-location extension                       |
+| longitude               | Patient       | Patient.address.extension(longitude) | 0..1        | Geo-location extension                       |
+| visit_id(last)          | Encounter     | Encounter.identifier.value           | 0..*        | Last recorded visit identifier               |
+| Last_visit_date         | Encounter     | Encounter.period.start               | 0..1        | Visit start date                             |
+| # visits-person         | Encounter     | Encounter.extension(visitCount)      | 0..1        | Stored as extension                          |
+| FBS                     | Observation   | Observation.code.coding.code         | 1..1        | LOINC = 1558-6                               |
+| FBS                     | Observation   | Observation.valueQuantity.value      | 1..1        | Numeric value (mg/dL)                        |
+| height                  | Observation   | Observation.code                     | 1..1        | LOINC = 8302-2                               |
+| height                  | Observation   | Observation.valueQuantity.value      | 1..1        | Unit = cm                                    |
+| weight                  | Observation   | Observation.code                     | 1..1        | LOINC = 29463-7                              |
+| weight                  | Observation   | Observation.valueQuantity.value      | 1..1        | Unit = kg                                    |
+| BMI                     | Observation   | Observation.code                     | 1..1        | LOINC = 39156-5                              |
+| BMI                     | Observation   | Observation.valueQuantity.value      | 1..1        | Derived value                                |
+| wc                      | Observation   | Observation.valueQuantity.value      | 0..1        | Waist circumference                          |
+| hc                      | Observation   | Observation.valueQuantity.value      | 0..1        | Hip circumference                            |
+| WC/HC                   | Observation   | Observation.valueQuantity.value      | 0..1        | Waist-hip ratio                              |
+| Tobacco_current         | Observation   | Observation.valueBoolean             | 0..1        | y → true, n → false                          |
+| Smoking_current         | Observation   | Observation.valueBoolean             | 0..1        | y → true, n → false                          |
+| Alcohol                 | Observation   | Observation.valueBoolean             | 0..1        | y → true, n → false                          |
+| Hypertension+Diabetes   | Condition     | Condition.code                       | 0..*        | Created only if present                      |
+| Hyperlipidemia+Diabetes | Condition     | Condition.code                       | 0..*        | Created only if present                      |
+| Chronic_illness (1–4)   | Condition     | Condition.code                       | 0..*        | One Condition per illness                    |
+| Education(Std)          | Observation   | Observation.valueInteger             | 0..1        | Education level                              |
+| Occupation              | Observation   | Observation.valueString              | 0..1        | Occupation                                   |
+| # members_in_household  | Observation   | Observation.valueInteger             | 0..1        | Household size                               |
+| #visits_households      | Observation   | Observation.valueInteger             | 0..1        | Household visits                             |
+| Amount spent            | Observation   | Observation.valueQuantity.value      | 0..1        | Healthcare expense                           |
+| RMHC                    | Organization  | Organization.name                    | 1..1        | Source organization                          |
