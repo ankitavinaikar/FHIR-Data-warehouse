@@ -1,0 +1,7 @@
+| PatientID | FirstName | LastName | Gender | BirthDate  | VisitDate  | Observation    | Value  | Unit |
+| --------- | --------- | -------- | ------ | ---------- | ---------- | -------------- | ------ | ---- |
+| P001      | John      | Doe      | M      | 1985-06-15 | 2025-01-10 | Blood Pressure | 120/80 | mmHg |
+| P002      | Jane      | Smith    | F      | 1990-03-22 | 2025-01-09 | Heart Rate     | 75     | bpm  |
+| P003      | Alex      | Johnson  | M      | 1978-11-05 | 2025-01-08 | Temperature    | 98.6   | F    |
+| P004      | Linda     | Williams | F      | 1982-07-30 | 2025-01-07 | Weight         | 68     | kg   |
+| P005      | Michael   | Brown    | M      | 1995-12-12 | 2025-01-06 | Height         | 175    | cm   |
