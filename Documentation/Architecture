@@ -1,0 +1,15 @@
+[ RMHC CSV Data Source ]
+           ↓
+[ Ingestion Layer – Python ETL ]
+           ↓
+[ STM Mapping Table ]
+           ↓
+[ Transformation to FHIR JSON ]
+           ↓
+[ Validation – FHIR Profiles ]
+           ↓
+[ FHIR Server (HAPI/Smile CDR) ]
+           ↓
+[ Analytics Dashboard / Research ]
+           ↓
+[ Policy & Public Health Impact ]
