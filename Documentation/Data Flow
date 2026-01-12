@@ -1,0 +1,56 @@
+┌──────────────────────────┐
+ │   RMHC Data Collection   │
+ │ (Field registers, camps) │
+ └──────────────┬───────────┘
+                │ Raw data
+                ▼
+ ┌──────────────────────────┐
+ │ CSV / Excel Data Storage │
+ │  (Exported RMHC dataset) │
+ └──────────────┬───────────┘
+                │ Import
+                ▼
+ ┌──────────────────────────┐
+ │ Python ETL Ingestion     │
+ │ - read CSV               │
+ │ - clean data             │
+ │ - remove duplicates      │
+ │ - validate values        │
+ └──────────────┬───────────┘
+                │ Valid data rows
+                ▼
+ ┌──────────────────────────┐
+ │ Source–Target Mapping    │
+ │ (STM Table)              │
+ │ RMHC columns → FHIR path │
+ └──────────────┬───────────┘
+                │ Mapped semantics
+                ▼
+ ┌──────────────────────────┐
+ │ FHIR Resource Creation   │
+ │ Patient / Observation    │
+ │ Encounter / Condition    │
+ │ Location / Organization  │
+ └──────────────┬───────────┘
+                │ JSON Bundle
+                ▼
+ ┌──────────────────────────┐
+ │ Validation Layer         │
+ │ - FHIR schema rules      │
+ │ - profiles & value sets  │
+ │ - ConceptMap translation │
+ └──────────────┬───────────┘
+                │ Valid bundles
+                ▼
+ ┌──────────────────────────┐
+ │ HAPI FHIR Server (Docker)│
+ │  http://localhost:8080   │
+ └──────────────┬───────────┘
+                │ REST API access
+                ▼
+ ┌──────────────────────────┐
+ │ Analytics & Dashboards   │
+ │ - NCD trends             │
+ │ - risk stratification    │
+ │ - ESG / sustainability   │
+ └──────────────────────────┘
